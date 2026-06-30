@@ -1,1 +1,26 @@
 <div>
+  Engine implementation stack — What language/runtime is the engine itself built in? (The vision lists Python/FastAPI/Quasar as target projects to be indexed, but not what the indexer is written in.) My default assumption: Python 3.11+ with Tree-sitter parsers, since it best matches the initial target ecosystem and plugin model.
+
+python is preferred with .venv
+
+
+---
+
+ Graph + index storage — The codeindex/ directory implies per-project, file-local storage. Which approach do you want?
+- (A) Embedded/file-based (e.g., SQLite/Kuzu graph + local vector store like FAISS/LanceDB) — portable, zero external services, lives entirely in codeindex/. (my default)
+- (B) External servers (Neo4j + a vector DB like Qdrant) — more powerful queries, but adds infra.
+Ans:
+- (A) Embedded/file-based (e.g., SQLite/Kuzu graph + local vector store like FAISS/LanceDB) — portable, zero external services, lives entirely in codeindex/. (my default)
+use best among chroma/lance/SQLite for this usecase
+
+---
+
+Embedding generation — Local model (e.g., a local code-embedding model, fully offline) or external API (e.g., OpenAI)? My default: local/offline embeddings to keep the engine self-contained and enterprise-friendly.
+
+prefere local model
+
+---
+
+ Timeline & team (for TP-001) — Target MVP date, team size, and budget? If unknown, I'll assume a 3-month MVP, 2–3 engineers.
+solo developer with ai's help (claude code's helo)
+</div>
